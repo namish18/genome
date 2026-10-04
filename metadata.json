@@ -1,0 +1,6 @@
+{
+  "name": "De Bruijn Graph Genome Assembler",
+  "description": "Interactive De Bruijn graph construction, Eulerian genome assembly, and comprehensive bioinformatics theory for sequence S1.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
