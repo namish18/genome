@@ -6,6 +6,7 @@ import { AssemblyControls } from './components/AssemblyControls.tsx';
 import { EulerianWalkSimulator } from './components/EulerianWalkSimulator.tsx';
 import { ContigViewer } from './components/ContigViewer.tsx';
 import { KmerSpectrum } from './components/KmerSpectrum.tsx';
+import { ArchitectureView } from './components/ArchitectureView.tsx';
 import { TheorySection } from './components/TheorySection.tsx';
 import { GENOME_S1_SEQUENCE, S1_STATS } from './data/genomeData.ts';
 import { buildDeBruijnGraph, generateEulerianAssemblyWalk } from './utils/debruijn.ts';
@@ -20,12 +21,13 @@ import {
   Sliders,
   Sparkles,
   ArrowRight,
+  Workflow,
 } from 'lucide-react';
 
 export default function App() {
   const [isDataModalOpen, setIsDataModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<
-    'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'theory'
+    'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'architecture' | 'theory'
   >('visualizer');
 
   // Assembly Parameters
@@ -271,7 +273,20 @@ export default function App() {
           </div>
         )}
 
-        {/* Tab 5: Comprehensive Theory */}
+        {/* Tab 5: Concept Map & System Architecture */}
+        {activeTab === 'architecture' && (
+          <div className="space-y-6 animate-in fade-in duration-150">
+            <ArchitectureView
+              k={k}
+              sequenceLength={activeSequence.length}
+              nodeCount={graph.nodeList.length}
+              edgeCount={graph.edges.length}
+              unitigCount={graph.unitigs.length}
+            />
+          </div>
+        )}
+
+        {/* Tab 6: Comprehensive Theory */}
         {activeTab === 'theory' && (
           <div className="space-y-6 animate-in fade-in duration-150">
             <TheorySection />
@@ -293,6 +308,13 @@ export default function App() {
               className="text-[#FFB703] hover:underline"
             >
               Show Data Record
+            </button>
+            <span aria-hidden="true">·</span>
+            <button
+              onClick={() => setActiveTab('architecture')}
+              className="text-[#FFB703] hover:underline"
+            >
+              Architecture & Concept Map
             </button>
             <span aria-hidden="true">·</span>
             <button

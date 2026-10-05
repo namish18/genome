@@ -1,10 +1,10 @@
 import React from 'react';
-import { Database, FileText, Share2, Sparkles, BookOpen, Activity, Network } from 'lucide-react';
+import { Database, FileText, Share2, Sparkles, BookOpen, Activity, Network, Workflow } from 'lucide-react';
 
 interface HeaderProps {
   onOpenDataModal: () => void;
-  activeTab: 'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'theory';
-  setActiveTab: (tab: 'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'theory') => void;
+  activeTab: 'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'architecture' | 'theory';
+  setActiveTab: (tab: 'visualizer' | 'simulator' | 'contigs' | 'kmers' | 'architecture' | 'theory') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -26,10 +26,10 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Zone 2: Clean text navigation links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#F4EAD5]/70">
+        <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-[#F4EAD5]/70">
           <button
             onClick={() => setActiveTab('visualizer')}
-            className={`transition-colors flex items-center gap-1.5 pb-0.5 ${
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
               activeTab === 'visualizer'
                 ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
                 : 'hover:text-[#F4EAD5]'
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => setActiveTab('simulator')}
-            className={`transition-colors flex items-center gap-1.5 pb-0.5 ${
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
               activeTab === 'simulator'
                 ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
                 : 'hover:text-[#F4EAD5]'
@@ -53,36 +53,48 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => setActiveTab('contigs')}
-            className={`transition-colors flex items-center gap-1.5 pb-0.5 ${
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
               activeTab === 'contigs'
                 ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
                 : 'hover:text-[#F4EAD5]'
             }`}
           >
-            <span>Compacted Unitigs</span>
+            <span>Unitigs</span>
           </button>
 
           <button
             onClick={() => setActiveTab('kmers')}
-            className={`transition-colors flex items-center gap-1.5 pb-0.5 ${
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
               activeTab === 'kmers'
                 ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
                 : 'hover:text-[#F4EAD5]'
             }`}
           >
-            <span>K-mer Spectrum</span>
+            <span>K-mers</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('architecture')}
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
+              activeTab === 'architecture'
+                ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
+                : 'hover:text-[#F4EAD5]'
+            }`}
+          >
+            <Workflow className="w-4 h-4" />
+            <span>Architecture & Maps</span>
           </button>
 
           <button
             onClick={() => setActiveTab('theory')}
-            className={`transition-colors flex items-center gap-1.5 pb-0.5 ${
+            className={`transition-colors flex items-center gap-1.5 pb-0.5 whitespace-nowrap ${
               activeTab === 'theory'
                 ? 'text-[#FFB703] border-b-2 border-[#FFB703] font-semibold'
                 : 'hover:text-[#F4EAD5]'
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Bioinformatics Theory</span>
+            <span>Theory</span>
           </button>
         </nav>
 
@@ -132,6 +144,14 @@ export const Header: React.FC<HeaderProps> = ({
           }`}
         >
           K-mers
+        </button>
+        <button
+          onClick={() => setActiveTab('architecture')}
+          className={`px-2 py-1 rounded whitespace-nowrap ${
+            activeTab === 'architecture' ? 'bg-[#1F6F50] text-[#FFB703]' : ''
+          }`}
+        >
+          Architecture
         </button>
         <button
           onClick={() => setActiveTab('theory')}
